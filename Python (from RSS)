@@ -1,0 +1,67 @@
+import requests
+import xml.etree.ElementTree as ET
+import re
+import codecs
+import unicodedata
+from bs4 import BeautifulSoup
+from BeautifulSoup import BeautifulSoup
+url = 'http://projects.anuyantra.com/published-projects.xml'
+r = requests.get(url)
+root=ET.fromstring(r.content)
+titles=[]
+urls=[]
+projectDes=[]
+count=0
+flag=0
+numSent=1 #max of sentences to include from discription
+for thing in root.iter('title'):
+    if flag>0:
+        titles.append(thing.text)
+    flag=1
+flag=0
+for thing in root.iter('link'):
+    if flag>0:
+        urls.append(thing.text)
+    flag=1
+states=[]
+districts=[]
+for thing in root.iter('description'):
+    count=count+1
+    holdstring=[]
+    testtext=thing.text
+    if count>1:
+        for i in testtext:
+            try:
+                holdstring.append(str(i))
+            except UnicodeEncodeError, e:
+                continue
+        newstring=''.join(holdstring)
+        projectsum=re.search(r'Project Summary.* ', newstring)
+        soup=BeautifulSoup(newstring[projectsum.start():len(newstring)])
+        unClean=soup.getText()
+        cleanedPar=' '.join(unClean.split('nbsp;')[1:len(unClean.split('nbsp;'))])
+        description='.'.join(cleanedPar.split('.')[0:numSent])
+        projectDes.append(description)
+        try:
+            state=re.search(r'/state/.{1,45} ', newstring)
+            states.append(state.group(0))
+            district=re.search(r'/district/.{1,45} ', newstring)
+            districts.append(district.group(0))
+        except AttributeError:
+            continue
+statenames = []            
+for i in states:
+    one = i.split("/")[2].strip()
+    statenames.append(one.split('"')[0].strip())
+    
+distnames=[]
+for j in districts:
+    one = j.split("/")[2].strip()
+    distnames.append(one.split('"')[0].strip())
+    
+longlats = [[26.5727, 73.8390], [30.3300, 78.0600], [28.6100, 77.2300], [25.3700, 85.1300], [23.2500, 77.4170], [12.9702, 77.5603], 
+ [23.2167, 72.6833],[22.5667, 88.3667], [12.9702, 77.5603], [20.1500, 85.5000]]
+    
+tuples=zip(titles, urls, statenames, distnames, longlats, projectDes)
+list_of_lists = [list(elem) for elem in tuples]
+list_of_lists
