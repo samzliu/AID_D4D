@@ -4,7 +4,7 @@
     <title>AID Projects</title>
 
     <style>
-        body{
+        html, body{
             margin: 0px;
             height:100%;
         }
@@ -12,7 +12,7 @@
             font-size:13px;
         }
         #map-canvas {
-            width:60%;
+            width:100%;
             height:690px;
             float:right;
             margin-top: 0px;
@@ -20,21 +20,24 @@
         .list {
           font-family:sans-serif;
           margin:0;
-          padding:20px 0 0;
+          padding: 0 20px 0;
         }
         .list > li {
           display:block;
-          background-color: #eee;
+          background-color: white;
           padding:10px;
-          box-shadow: inset 0 1px 0 #fff;
-          margin-top: 2px;
-          margin-bottom: 2px;
+          margin-top: 1px;
+          margin-bottom: 5px;
+          margin-right: 4px;
+          margin-left: 4px;
+          border-bottom: 1px solid;
+        }
+        li .district, li .state{
+          display: inline;
+          line-height: 27px;
         }
         .avatar {
           max-width: 150px;
-        }
-        img {
-          max-width: 100%;
         }
         h3 {
           font-size: 16px;
@@ -49,7 +52,7 @@
           border:solid 1px #ccc;
           border-radius: 5px;
           padding:7px 14px;
-          width: 80%;
+          width: 30%;
           margin: 20px;
         }
         input:focus {
@@ -58,7 +61,8 @@
         }
         button {
             margin-left: 5px;
-            margin-right: 5px;
+            margin-right: 0;
+            margin-bottom: 0px;
             width: 80px;
             padding:8px 10px;
         }
@@ -66,7 +70,7 @@
             font-family:sans-serif;
             font-size: 14px;
             line-height: 27px;
-            margin-left: 10px;
+            margin-left: 0;
         }
         .sort {
           padding:8px 10px;
@@ -119,10 +123,14 @@
           right:-5px;
         }
         #projects{
-            width:40%;
+            width:45%;
             height:690px;
             float:right;
             margin-top: 0px;
+            position: absolute; 
+            top: 15px;
+            left: 20px;
+            z-index: 99;
         }
         #projects h3 {
             cursor: pointer;
@@ -137,6 +145,15 @@
         }
         #projects li.active ul {
             display: block;
+        }
+        .wrap {
+          background-color: white;
+          box-shadow: 
+            2px 1px 5px 2px rgba(0, 0, 0, 0.3); 
+        }
+        #top{
+          margin-bottom: 10px;
+          padding-right: 2px;
         }
     </style>
 
@@ -167,21 +184,25 @@
         // ["Deepa Academy", "http://projects.anuyantra.com/project/deepa-academy", "karnataka", "bangalore-rural", [12.9702, 77.5603]], 
         // ["ARTRC", "http://projects.anuyantra.com/project/artrc", "odisha", "khordha", [20.15, 85.5]]
 
-        {projectname:"RTI Manch", url:"http://projects.anuyantra.com/project/rti-manch", district:"rajasthan", state:"jaipur", longlat: [26.5727, 73.839]},
-        {projectname: "Dam Awareness Project in Uttarakhand ", url:"http://projects.anuyantra.com/project/dam-awareness-project-uttarakhand", district:"uttarakhand", state:"uttarkashi", longlat:[30.33, 78.06]}
+        {projectname:"RTI Manch", url:"http://projects.anuyantra.com/project/rti-manch", district:"rajasthan", state:"jaipur", longlat: [26.5727, 73.839], sum: "insert long sum here. blah blah A function that returns an HTML string, DOM element(s), or jQuery object to insert after each element in the set of matched elements. Receives the index position ... unicorn"},
+        {projectname: "Dam Awareness Project in Uttarakhand ", url:"http://projects.anuyantra.com/project/dam-awareness-project-uttarakhand", district:"uttarakhand", state:"uttarkashi", longlat:[30.33, 78.06], sum: "lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum"}
     ];
 
-    var indiaCenter = new google.maps.LatLng(21, 77.7200);
+    var mapCenter = new google.maps.LatLng(20.882847, 66.256759);
     var boxList =[];
-    var side_bar_link = ""; 
     var gmarkers = []; 
+    var buffer="";
 
     function initialize() {
 
         //create map
         map = new google.maps.Map(document.getElementById('map-canvas'), {
             zoom: 5,
-            center: indiaCenter
+            center: mapCenter,
+            zoomControl: true,
+            zoomControlOptions: {
+                position: google.maps.ControlPosition.RIGHT_BOTTOM
+            }
         });
 
         //add markers for each project
@@ -196,24 +217,21 @@
 
         //initialize project list
         var options = {
-            valueNames: ['projectname', 'url', 'district', 'state'],
-            item: '<li><h3 class="projectname"></h3><ul><li>"hi"</li></ul></li>'
+            valueNames: ['projectname', 'url', 'district', 'state', 'sum']
         };
 
-        var projects = new List('projects', options, cityList);
-
-        // //make sidebar lnks
-        // document.getElementById("marker_list").innerHTML = side_bar_link;
+        var projects = new List('projects', options);
 
         /*jQuery time*/
         $(document).ready(function(){
             $("#projects h3").click(function(){
                 //slide up all the link lists
-                $("#projects ul ul").slideUp();
+                $(this).next().slideUp();
                 //slide down the link list below the h3 clicked - only if its closed
                 if(!$(this).next().is(":visible"))
                 {
-                    $(this).next().slideDown();
+                    $(this).next().slideDown()
+                    console.log($(this).next())
                 }
             })
         })
@@ -231,7 +249,10 @@
         
 
         //reset center and zoom
-        map.setCenter(gmarkers[i].getPosition());
+        var newlong = gmarkers[i].getPosition().k-2;
+        var newlat = gmarkers[i].getPosition().B-7;
+        var newCenter = new google.maps.LatLng(newlong, newlat);
+        map.setCenter(newCenter);
         map.setZoom(6);
     }
 
@@ -260,8 +281,8 @@
             //create textbox
             var boxText = document.createElement("div");
             boxText.id = i;
-            boxText.style.cssText = "width: 150px; border: 1px solid gray; margin-top: 8px; background: white; padding:10px; font-family:Verdana, sans-serif; font-size: 14px;";
-            boxText.innerHTML = '<b>'+cityList[i].projectname+'</b><br><p>Click for more</p>';
+            boxText.style.cssText = "width: 250px; box-shadow:2px 1px 5px 2px rgba(0, 0, 0, 0.3); margin-top: 8px; background: white; padding:10px; font-family:Verdana, sans-serif; font-size: 12px;";
+            boxText.innerHTML = createInfoWindowContent(cityList[i])+'<br><p>Click for more</p>';
 
             //set infobox style options
             var myOptions = {
@@ -271,7 +292,7 @@
                 ,pixelOffset: new google.maps.Size(-140, 0)
                 ,zIndex: null
                 ,boxStyle: {
-                    width: "280px"
+                    width: "400px"
                 }
                 ,closeBoxMargin: "10px 2px 2px 2px"
                 ,closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif"
@@ -305,8 +326,11 @@
                     }
                   })(marker, i));
 
-            // side_bar_link += '<li><b><a id="projectname" href="javascript:myclick(' + (gmarkers.length-1) + ')">' + cityList[i].projectname + '<\/a></b><br><p>' + createInfoWindowContent(cityList[i]) +'<p></li>';
+            //create list
+            buffer+="<li><p class='district'>"+ capitalise(cityList[i].district)+"</p>, <p class='state'>"+capitalise(cityList[i].state)+"</p><h3 class='projectname'>"+cityList[i].projectname+"</h3><ul><li><p class='sum'>"+cityList[i].sum+"</p></li><li><a id='visit' href='javascript:myclick(" + (gmarkers.length-1) + ")'><p>See on map<p></a></li></ul></li>";
         }
+
+        $('#master').html(buffer);
     }
 
     //build a button to reset map entirely to view of India
@@ -341,7 +365,7 @@
         
             //zoom out and center
             map.setZoom(5)
-            map.setCenter(indiaCenter)
+            map.setCenter(mapCenter)
 
             //close all infoboxes
             for ( h = 0; h < boxList.length; h++ ) {
@@ -350,19 +374,19 @@
         });
       }
 
-      //function to make list from imported python data
       //helper function to create content window for each project
         function createInfoWindowContent(project) {
             return [
-              'State: ' + capitaliseFirstLetter(project.state),
-              'District: ' + capitaliseFirstLetter(project.district),
-              'Description:',
+              '<b>' + project.projectname + '</b>',
+              'State: ' + capitalise(project.state),
+              'District: ' + capitalise(project.district),
+              'sum:',
               '<a id="url" href='+project.url+'>Visit project page<\/a>'
             ].join('<br>');
         }
 
         //capitalization
-        function capitaliseFirstLetter(string)
+        function capitalise(string)
         {
             return string.charAt(0).toUpperCase() + string.slice(1);
         }
@@ -375,9 +399,9 @@
 
     <!-- sidebar to list projects -->
     <div id = "projects"> 
-
+      <div class="wrap" id="top">
         <!-- search box -->
-        <input class="search" placeholder="Search projects" /><br>
+        <input class="search" placeholder="Search projects" />
 
         <!-- buttons -->
         <span id= 'sort'>Sort by:</span>
@@ -387,12 +411,15 @@
         <button class="sort" data-sort="state">
             State
         </button>
-         <button class="sort" data-sort="state">
+         <button class="sort" data-sort="">
             TBD
         </button>
+      </div>
 
+      <div class="wrap" id = "content">
         <!-- list -->
-        <br><ul class="list"></ul>
+        <ul class="list" id="master"></ul>
+      </div>
     </div>
 
 </body>
