@@ -11,11 +11,44 @@
         p{
             font-size:13px;
         }
+        .wrap {
+          background-color: white;
+          box-shadow: 
+            2px 1px 5px 2px rgba(0, 0, 0, 0.3); 
+        }
+        #top{
+          margin-bottom: 10px;
+          padding-right: 2px;
+        }
         #map-canvas {
             width:100%;
             height:690px;
             float:right;
             margin-top: 0px;
+        }
+        #projects{
+          width:46%;
+          height:690px;
+          float:right;
+          margin-top: 0px;
+          position: absolute; 
+          top: 15px;
+          left: 20px;
+          z-index: 99;
+        }
+        #projects h3 {
+            cursor: pointer;
+        }
+        #projects h3:hover {
+            text-shadow: 0 0 1px rgba(255, 255, 255, 0.7);
+            color: gray;
+        }
+        /*hide the non active LIs by default*/
+        #projects ul ul {
+            display: none;
+        }
+        #projects li.active ul {
+            display: block;
         }
         .list {
           font-family:sans-serif;
@@ -30,7 +63,7 @@
           margin-bottom: 5px;
           margin-right: 4px;
           margin-left: 4px;
-          border-bottom: 1px solid;
+          border-bottom: 1px solid gray;
         }
         li .district, li .state{
           display: inline;
@@ -54,26 +87,42 @@
           padding:7px 14px;
           width: 30%;
           margin: 20px;
+          margin-right: 5px;
+
         }
         input:focus {
           outline:none;
           border-color:#aaa;
         }
-        button {
-            margin-left: 5px;
-            margin-right: 0;
-            margin-bottom: 0px;
-            width: 80px;
-            padding:8px 10px;
-        }
-        #sort {
-            font-family:sans-serif;
-            font-size: 14px;
-            line-height: 27px;
-            margin-left: 0;
-        }
-        .sort {
+        button{
+          margin-left: 1px;
+          margin-right: 0;
+          margin-bottom: 0px;
+          width: 110px;
           padding:8px 10px;
+        }
+        #category{
+          width: 120px;
+        }
+        .arrow {
+          margin-top: 5px;
+          float: right;
+          width: 0; 
+          height: 0; 
+          border-left: 8px solid transparent;
+          border-right: 8px solid transparent;
+          border-top: 8px solid black;
+        }
+        .arrowsmall {
+          margin-top: 5px;
+          float: right;
+          width: 0; 
+          height: 0; 
+          border-left: 5px solid transparent;
+          border-right: 5px solid transparent;
+          border-top: 5px solid white;
+        }
+        .sort, .menu{
           border-radius: 6px;
           border:none;
           display:inline-block;
@@ -81,6 +130,7 @@
           text-decoration: none;
           background-color: #28a8e0;
           height:30px;
+          cursor: pointer;
         }
         .sort:hover {
           text-decoration: none;
@@ -97,7 +147,7 @@
           border-bottom: 5px solid transparent;
           content:"";
           position: relative;
-          top:-10px;
+          top:-15px;
           right:-5px;
         }
         .sort.asc:after {
@@ -108,7 +158,7 @@
           border-top: 5px solid #fff;
           content:"";
           position: relative;
-          top:13px;
+          top:9px;
           right:-5px;
         }
         .sort.desc:after {
@@ -122,38 +172,72 @@
           top:-10px;
           right:-5px;
         }
-        #projects{
-            width:45%;
-            height:690px;
-            float:right;
-            margin-top: 0px;
-            position: absolute; 
-            top: 15px;
-            left: 20px;
-            z-index: 99;
+        #sort{
+          font-family:sans-serif;
+          font-size: 14px;
+          line-height: 27px;
+          margin-left: 0;
         }
-        #projects h3 {
-            cursor: pointer;
+        .menu {
+          margin-left: 5px;
+          margin-right: 0;
+          margin-bottom: 0px;
+          width: 90px;
+          padding:8px 10px;
+          height: 14px;
         }
-        #projects h3:hover {
-            text-shadow: 0 0 1px rgba(255, 255, 255, 0.7);
-            color: gray;
+        .menu, #drop1, #drop2 ul{
+          font-family:sans-serif;
+          font-size: 11px;
+          line-height: 15px;
+          margin-left: 0;
+        }   
+        .menu:hover {
+          text-decoration: none;
+          background-color:#1b8aba;
+          cursor: pointer;
         }
-        /*hide the non active LIs by default*/
-        #projects ul ul {
-            display: none;
+        #drop1 ul {
+          border-radius: 6px;
+          border:none;
+          padding:0;
+          position: absolute;
+          top: 50px;
+          left: 240px;
+          width: 150px;
+          box-shadow: none;
+          display: none;
+          opacity: 0;
+          visibility: hidden;
         }
-        #projects li.active ul {
-            display: block;
+        #drop2 ul{
+          border-radius: 6px;
+          border:none;
+          padding:0;
+          position: absolute;
+          top: 50px;
+          left: 355px;
+          width: 150px;
+          box-shadow: none;
+          display: none;
+          opacity: 0;
+          visibility: hidden;
         }
-        .wrap {
-          background-color: white;
-          box-shadow: 
-            2px 1px 5px 2px rgba(0, 0, 0, 0.3); 
+        #drop1 ul li, #drop2 ul li { 
+          background: #555; 
+          display: block; 
+          color:#fff;
+          background-color: #767474;
+          padding:8px 10px;
         }
-        #top{
-          margin-bottom: 10px;
-          padding-right: 2px;
+        .menu #drop1 li:hover, .menu #drop2 li:hover  { 
+          background-color:#1b8aba; 
+        }
+        .menu:hover #drop1 ul, .menu:hover #drop2 ul{
+          display: block;
+          opacity: 1;
+          visibility: visible;
+          background-color:#1b8aba;
         }
     </style>
 
@@ -184,8 +268,8 @@
         // ["Deepa Academy", "http://projects.anuyantra.com/project/deepa-academy", "karnataka", "bangalore-rural", [12.9702, 77.5603]], 
         // ["ARTRC", "http://projects.anuyantra.com/project/artrc", "odisha", "khordha", [20.15, 85.5]]
 
-        {projectname:"RTI Manch", url:"http://projects.anuyantra.com/project/rti-manch", district:"rajasthan", state:"jaipur", longlat: [26.5727, 73.839], sum: "insert long sum here. blah blah A function that returns an HTML string, DOM element(s), or jQuery object to insert after each element in the set of matched elements. Receives the index position ... unicorn"},
-        {projectname: "Dam Awareness Project in Uttarakhand ", url:"http://projects.anuyantra.com/project/dam-awareness-project-uttarakhand", district:"uttarakhand", state:"uttarkashi", longlat:[30.33, 78.06], sum: "lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum"}
+        {projectname:"RTI Manch", url:"http://projects.anuyantra.com/project/rti-manch", district:"rajasthan", state:"jaipur (जयपुर)", longlat: [26.5727, 73.839], sum: "insert long sum here. blah blah A function that returns an HTML string, DOM element(s), or jQuery object to insert after each element in the set of matched elements. Receives the index position ... unicorn"},
+        {projectname: "Dam Awareness Project in Uttarakhand ", url:"http://projects.anuyantra.com/project/dam-awareness-project-uttarakhand", district:"uttarakhand", state:"uttarkashi (उत्तरकाशी)", longlat:[30.33, 78.06], sum: "lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum"}
     ];
 
     var mapCenter = new google.maps.LatLng(20.882847, 66.256759);
@@ -225,15 +309,50 @@
         /*jQuery time*/
         $(document).ready(function(){
             $("#projects h3").click(function(){
+
                 //slide up all the link lists
                 $(this).next().slideUp();
+
+                //reset all arrows to point downwards
+                $(this).find(".arrow").css({"border-bottom":0, "border-top":"8px solid black"});
+
                 //slide down the link list below the h3 clicked - only if its closed
                 if(!$(this).next().is(":visible"))
                 {
                     $(this).next().slideDown()
-                    console.log($(this).next())
+
+                    //reset arrow to point upwards
+                    $(this).find(".arrow").css({"border-bottom":"8px solid black", "border-top":0});
                 }
+                
             })
+
+            //filter results by state
+            $("#drop1 ul li").click(function(){
+              //get selected state
+              state = $(this).text();
+
+              //filter results and show in search bar
+              projects.search(state);
+              $('.search').val(state);
+
+              //zoom on state
+              if(state=="Jaipur (जयपुर)"){
+                var newCenter = new google.maps.LatLng(26.5727-2, 73.839-7);
+                map.setCenter(newCenter);
+                map.setZoom(6);
+              }
+
+            })
+            // //clear filter
+            // $("#drop1").click(function(){
+            //   current = $('.search').val();
+            //   console.log(current);
+
+            //   if(current != ""){
+            //     $("#drop1").text("Select state");
+            //   }
+            // })
         })
     }
 
@@ -327,7 +446,7 @@
                   })(marker, i));
 
             //create list
-            buffer+="<li><p class='district'>"+ capitalise(cityList[i].district)+"</p>, <p class='state'>"+capitalise(cityList[i].state)+"</p><h3 class='projectname'>"+cityList[i].projectname+"</h3><ul><li><p class='sum'>"+cityList[i].sum+"</p></li><li><a id='visit' href='javascript:myclick(" + (gmarkers.length-1) + ")'><p>See on map<p></a></li></ul></li>";
+            buffer+="<li><p class='district'>"+ capitalise(cityList[i].district)+"</p>, <p class='state'>"+capitalise(cityList[i].state)+"</p><h3 class='projectname'>"+cityList[i].projectname+"<div class='arrow'></div></h3><ul><li><p class='sum'>"+cityList[i].sum+"</p></li><li><a id='visit' href='javascript:myclick(" + (gmarkers.length-1) + ")'><p>See on map<p></a></li></ul></li>";
         }
 
         $('#master').html(buffer);
@@ -339,24 +458,26 @@
         // Set CSS styles for the DIV containing the control
         // Setting padding to 5 px will offset the control
         // from the edge of the map
-        controlDiv.style.padding = '5px';
+        controlDiv.style.padding = '6px';
 
         // Set CSS for the control border
         var controlUI = document.createElement('div');
         controlUI.style.backgroundColor = 'white';
-        controlUI.style.borderStyle = 'solid';
-        controlUI.style.borderWidth = '1px';
+        controlUI.style.borderColor = 'gray';
+        controlUI.style.border = '1px';
+        controlUI.style.boxShadow = '1px 1px 2px 1px rgba(0, 0, 0, 0.3)';
         controlUI.style.cursor = 'pointer';
         controlUI.style.textAlign = 'center';
-        controlUI.title = 'Click to set the map to all India';
         controlDiv.appendChild(controlUI);
 
         // Set CSS for the control interior
         var controlText = document.createElement('div');
-        controlText.style.fontFamily = 'Arial,sans-serif';
-        controlText.style.fontSize = '12px';
+        controlText.style.fontFamily = 'sans-serif';
+        controlText.style.fontSize = '11px';
         controlText.style.paddingLeft = '4px';
         controlText.style.paddingRight = '4px';
+        controlText.style.paddingTop = '2px';
+        controlText.style.paddingBottom = '2px';
         controlText.innerHTML = '<b>Show All India</b>';
         controlUI.appendChild(controlText);
 
@@ -375,21 +496,21 @@
       }
 
       //helper function to create content window for each project
-        function createInfoWindowContent(project) {
-            return [
-              '<b>' + project.projectname + '</b>',
-              'State: ' + capitalise(project.state),
-              'District: ' + capitalise(project.district),
-              'sum:',
-              '<a id="url" href='+project.url+'>Visit project page<\/a>'
-            ].join('<br>');
-        }
+      function createInfoWindowContent(project) {
+          return [
+            '<b>' + project.projectname + '</b>',
+            'State: ' + capitalise(project.state),
+            'District: ' + capitalise(project.district),
+            'sum:',
+            '<a id="url" href='+project.url+'>Visit project page<\/a>'
+          ].join('<br>');
+      }
 
-        //capitalization
-        function capitalise(string)
-        {
-            return string.charAt(0).toUpperCase() + string.slice(1);
-        }
+      //capitalization
+      function capitalise(string)
+      {
+          return string.charAt(0).toUpperCase() + string.slice(1);
+      }
     </script>
 </head>
 
@@ -401,18 +522,33 @@
     <div id = "projects"> 
       <div class="wrap" id="top">
         <!-- search box -->
-        <input class="search" placeholder="Search projects" />
+        <input class="search" placeholder="Search projects"/>
 
         <!-- buttons -->
-        <span id= 'sort'>Sort by:</span>
+        <ul class='menu'>
+          <li id='drop1'>
+            Select state
+            <div class="arrowsmall"></div>
+            <ul>
+              <li>Jaipur (जयपुर)</li>
+              <li>Uttarkashi (उत्तरकाशी)</li>
+              <li>State 3</li>
+            </ul>
+          </li>
+        </ul>
+        <ul class='menu'>
+          <li id='drop2'>
+            Select category
+            <div class="arrowsmall"></div>
+            <ul>
+              <li>Humanitarian</li>
+              <li>Women</li>
+              <li>Other</li>
+            </ul>
+          </li>
+        </ul>
         <button class="sort" data-sort="projectname">
-            Project 
-        </button>
-        <button class="sort" data-sort="state">
-            State
-        </button>
-         <button class="sort" data-sort="">
-            TBD
+          Sort by project
         </button>
       </div>
 
