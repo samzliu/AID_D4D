@@ -11,6 +11,11 @@
         p{
             font-size:13px;
         }
+        ul
+        {
+          padding: 0;
+          list-style-type: none;
+        }
         .wrap {
           background-color: white;
           box-shadow: 
@@ -64,8 +69,12 @@
           margin-right: 4px;
           margin-left: 4px;
           border-bottom: 1px solid gray;
+          line-height: 15px;
         }
-        li .district, li .state{
+        .list li ul{
+          margin-top: 15px;
+        }
+        li .district, li .state, li h4{
           display: inline;
           line-height: 27px;
         }
@@ -75,8 +84,13 @@
         h3 {
           font-size: 16px;
           margin:0 0 0.3rem;
-          font-weight: normal;
           font-weight:bold;
+          color: #28a8e0;
+        }
+        h4{
+          margin: 0 0 0.3rem;
+          font-size: 12px;
+          font-weight: normal;
         }
         p {
           margin:0;
@@ -111,7 +125,7 @@
           height: 0; 
           border-left: 8px solid transparent;
           border-right: 8px solid transparent;
-          border-top: 8px solid black;
+          border-top: 8px solid gray;
         }
         .arrowsmall {
           margin-top: 5px;
@@ -239,6 +253,16 @@
           visibility: visible;
           background-color:#1b8aba;
         }
+        .link1, .link2{
+          display:inline-block;
+          margin-top: 0;
+        }
+        .link2{
+          padding-left:10px;
+        }
+        .describe{
+          margin-top: 8px;
+        }
     </style>
 
     <!-- list.js -->
@@ -268,8 +292,8 @@
         // ["Deepa Academy", "http://projects.anuyantra.com/project/deepa-academy", "karnataka", "bangalore-rural", [12.9702, 77.5603]], 
         // ["ARTRC", "http://projects.anuyantra.com/project/artrc", "odisha", "khordha", [20.15, 85.5]]
 
-        {projectname:"RTI Manch", url:"http://projects.anuyantra.com/project/rti-manch", district:"rajasthan", state:"jaipur (जयपुर)", longlat: [26.5727, 73.839], sum: "insert long sum here. blah blah A function that returns an HTML string, DOM element(s), or jQuery object to insert after each element in the set of matched elements. Receives the index position ... unicorn"},
-        {projectname: "Dam Awareness Project in Uttarakhand ", url:"http://projects.anuyantra.com/project/dam-awareness-project-uttarakhand", district:"uttarakhand", state:"uttarkashi (उत्तरकाशी)", longlat:[30.33, 78.06], sum: "lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum"}
+        {projectname:"RTI Manch", url:"http://projects.anuyantra.com/project/rti-manch", NGO:"RTI MANCH with Manthan", district:"rajasthan", state:"jaipur (जयपुर)", longlat: [26.5727, 73.839], budget: "₹617,000.00", category:"Peoples Rights and Justice", sum: "Manthan's RTI Manch initiative focuses on improving transparency in governance and helping people empower themselves by using Right to Information correctly. They also raise awareness about Mahatma Gandhi National Rural Employment Guarantee Act (MGNREGA) that guarantees 100 days of employment yearly to a rural household in the form of manual labour."},
+        {projectname: "Dam Awareness Project in Uttarakhand ", url:"http://projects.anuyantra.com/project/dam-awareness-project-uttarakhand", NGO:"India Institute of Critical Action - Center in Movement CACIM", district:"uttarakhand", state:"uttarkashi (उत्तरकाशी)", longlat:[30.33, 78.06], category:"Peoples Rights and Justice", sum: "Rehabilitation and Awareness Program in Uttarakhand"}
     ];
 
     var mapCenter = new google.maps.LatLng(20.882847, 66.256759);
@@ -314,15 +338,15 @@
                 $(this).next().slideUp();
 
                 //reset all arrows to point downwards
-                $(this).find(".arrow").css({"border-bottom":0, "border-top":"8px solid black"});
+                $(this).find(".arrow").css({"border-bottom":0, "border-top":"8px solid gray"});
 
                 //slide down the link list below the h3 clicked - only if its closed
                 if(!$(this).next().is(":visible"))
                 {
-                    $(this).next().slideDown()
+                    $(this).next().slideDown();
 
                     //reset arrow to point upwards
-                    $(this).find(".arrow").css({"border-bottom":"8px solid black", "border-top":0});
+                    $(this).find(".arrow").css({"border-bottom":"8px solid gray", "border-top":0});
                 }
                 
             })
@@ -344,6 +368,21 @@
               }
 
             })
+            //filter results by category
+            // $("#drop2 ul li").click(function(){
+            //   //get selected state
+            //   category = $(this).text();
+
+            //   //filter results and show in search bar
+            //   projects.search(category);
+            //   $('.search').val(category);
+
+            //   //zoom on state
+            //   // if(state=="Jaipur (जयपुर)"){
+            //   //   var newCenter = new google.maps.LatLng(26.5727-2, 73.839-7);
+            //   //   map.setCenter(newCenter);
+            //   //   map.setZoom(6);
+            //   })
             // //clear filter
             // $("#drop1").click(function(){
             //   current = $('.search').val();
@@ -375,6 +414,13 @@
         map.setZoom(6);
     }
 
+    //function to open sidebar details
+    function openside(i) {
+      projects.search(i);
+      $('.search').val(i);
+      $("#projects h3:contains(i)").next().slideDown();
+    }
+
     //add markers, infoboxes for each location
     function addMarkers(){
         for (var i = 0; i < cityList.length; i++)
@@ -401,7 +447,7 @@
             var boxText = document.createElement("div");
             boxText.id = i;
             boxText.style.cssText = "width: 250px; box-shadow:2px 1px 5px 2px rgba(0, 0, 0, 0.3); margin-top: 8px; background: white; padding:10px; font-family:Verdana, sans-serif; font-size: 12px;";
-            boxText.innerHTML = createInfoWindowContent(cityList[i])+'<br><p>Click for more</p>';
+            boxText.innerHTML = createInfoWindowContent(cityList[i]);
 
             //set infobox style options
             var myOptions = {
@@ -446,7 +492,7 @@
                   })(marker, i));
 
             //create list
-            buffer+="<li><p class='district'>"+ capitalise(cityList[i].district)+"</p>, <p class='state'>"+capitalise(cityList[i].state)+"</p><h3 class='projectname'>"+cityList[i].projectname+"<div class='arrow'></div></h3><ul><li><p class='sum'>"+cityList[i].sum+"</p></li><li><a id='visit' href='javascript:myclick(" + (gmarkers.length-1) + ")'><p>See on map<p></a></li></ul></li>";
+            buffer+="<li>" + createList(cityList[i]) + "</li>";
         }
 
         $('#master').html(buffer);
@@ -499,11 +545,27 @@
       function createInfoWindowContent(project) {
           return [
             '<b>' + project.projectname + '</b>',
-            'State: ' + capitalise(project.state),
-            'District: ' + capitalise(project.district),
-            'sum:',
-            '<a id="url" href='+project.url+'>Visit project page<\/a>'
+            capitalise(project.district) + ", " + capitalise(project.state),
+            '<i>' + project.category + '</i>',
+            'NGO partner: ' + project.NGO,
+            '<a href="javascript:openside('+project.projectname+')">Learn more<\/a>'
           ].join('<br>');
+      }
+      //similar helper for list elements
+      function createList(i){
+        return [
+          "<i><p class='district'>"+ capitalise(i.district)+", </p>",
+          "<p class='state'>"+capitalise(i.state)+"</p></i>",
+          "<h4> – "+i.category+"</h4>",
+          "<h3 class='projectname'>"+i.projectname+"<div class='arrow'></div></h3>",
+          "<ul>",
+          "<li><p class='describe'><b>Partner NGO</b>: "+i.NGO+"</p></li>",
+          "<li><p class='sum describe'><b>Description: </b>"+i.sum+"</p></li>",
+          "<li><p class='describe'><b>Budget</b>: "+i.budget+"</p></li>",
+          "<li><p><a id='visit' class='link1 describe' href='javascript:myclick(" + (gmarkers.length-1) + ")'>See on map</a>",
+          "<a id='url' class='link2 describe' href="+i.url+"'>Visit project page<\/a></p></li>",
+          "</ul>"
+        ].join("");
       }
 
       //capitalization
@@ -514,7 +576,7 @@
     </script>
 </head>
 
-<body onload="initialize();">
+<body onload="initialize();" link="gray">
 
     <div id ="map-canvas"></div>
 
@@ -541,7 +603,7 @@
             Select category
             <div class="arrowsmall"></div>
             <ul>
-              <li>Humanitarian</li>
+              <li>Peoples Rights and Justice</li>
               <li>Women</li>
               <li>Other</li>
             </ul>
