@@ -43,6 +43,7 @@
         }
         #projects h3 {
             cursor: pointer;
+            font-weight: normal;
         }
         #projects h3:hover {
             text-shadow: 0 0 1px rgba(255, 255, 255, 0.7);
@@ -563,7 +564,7 @@
           "<li><p class='sum describe'><b>Description: </b>"+i.sum+"</p></li>",
           "<li><p class='describe'><b>Budget</b>: "+i.budget+"</p></li>",
           "<li><p><a id='visit' class='link1 describe' href='javascript:myclick(" + (gmarkers.length-1) + ")'>See on map</a>",
-          "<a id='url' class='link2 describe' href="+i.url+"'>Visit project page<\/a></p></li>",
+          "<a id='url' class='link2 describe' href="+i.url+">Visit project page<\/a></p></li>",
           "</ul>"
         ].join("");
       }
