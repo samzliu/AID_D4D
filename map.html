@@ -41,6 +41,10 @@
           left: 20px;
           z-index: 99;
         }
+        #master{
+          height:575px;
+          overflow-y:scroll
+        }
         #projects h3 {
             cursor: pointer;
             font-weight: normal;
@@ -246,7 +250,7 @@
           padding:8px 10px;
         }
         .menu #drop1 li:hover, .menu #drop2 li:hover  { 
-          background-color:#1b8aba; 
+          background-color:#3c3a3a; 
         }
         .menu:hover #drop1 ul, .menu:hover #drop2 ul{
           display: block;
@@ -282,20 +286,19 @@
     <script type="text/javascript">
 
     var cityList = [
-        // ["RTI Manch", "http://projects.anuyantra.com/project/rti-manch", "rajasthan", "jaipur", [26.5727, 73.839]], 
-        // ["Dam Awareness Project in Uttarakhand ", "http://projects.anuyantra.com/project/dam-awareness-project-uttarakhand", "uttarakhand", "uttarkashi", [30.33, 78.06]], 
-        // ["Jaagriti - an awakening", "http://projects.anuyantra.com/project/jaagriti-awakening", "national-capital-territory-delhi", "south-west-delhi", [28.61, 77.23]], 
-        // ["Joyful Education & Holistic Development Of 300 Disadvantaged Slum Childrens In 8 Slums Of Patna", "http://projects.anuyantra.com/project/joyful-education-holistic-development-300-disadvantaged-slum-childrens-8-slums-patna", "bihar", "patna", [25.37, 85.13]], 
-        // ["Sathi - Cehat", "http://projects.anuyantra.com/project/sathi-cehat", "madhya-pradesh", "barwani", [23.25, 77.417]], 
-        // ["Protection of Amrit Mahal Kavals of Challakere Taluk", "http://projects.anuyantra.com/project/protection-amrit-mahal-kavals-challakere-taluk", "karnataka", "chitradurga", [12.9702, 77.5603]], 
-        // ["Mainstreaming Gender Perspectives in Various Institutions", "http://projects.anuyantra.com/project/mainstreaming-gender-perspectives-various-institutions", "gujarat", "ahmedabad", [23.2167, 72.6833]], 
-        // ["Sustainable Organic Farming in Sunderbans (with BTS)", "http://projects.anuyantra.com/project/sustainable-organic-farming-sunderbans-bts", "west-bengal", "south-24-parganas", [22.5667, 88.3667]], 
-        // ["Deepa Academy", "http://projects.anuyantra.com/project/deepa-academy", "karnataka", "bangalore-rural", [12.9702, 77.5603]], 
-        // ["ARTRC", "http://projects.anuyantra.com/project/artrc", "odisha", "khordha", [20.15, 85.5]]
-
-        {projectname:"RTI Manch", url:"http://projects.anuyantra.com/project/rti-manch", NGO:"RTI MANCH with Manthan", district:"rajasthan", state:"jaipur (जयपुर)", longlat: [26.5727, 73.839], budget: "₹617,000.00", category:"Peoples Rights and Justice", sum: "Manthan's RTI Manch initiative focuses on improving transparency in governance and helping people empower themselves by using Right to Information correctly. They also raise awareness about Mahatma Gandhi National Rural Employment Guarantee Act (MGNREGA) that guarantees 100 days of employment yearly to a rural household in the form of manual labour."},
-        {projectname: "Dam Awareness Project in Uttarakhand ", url:"http://projects.anuyantra.com/project/dam-awareness-project-uttarakhand", NGO:"India Institute of Critical Action - Center in Movement CACIM", district:"uttarakhand", state:"uttarkashi (उत्तरकाशी)", longlat:[30.33, 78.06], category:"Peoples Rights and Justice", sum: "Rehabilitation and Awareness Program in Uttarakhand"}
+      {category: 'Peoples Rights and Justice', district: 'jaipur', url: 'http://projects.anuyantra.com/project/rti-manch', projectname: 'RTI Manch', sum: "Manthan's RTI Manch initiative focuses on improving transparency in governance and helping people empower themselves by using Right to Information correctly", state: 'rajasthan', longlat: [26.9161293,75.8204056]}, 
+      {category: 'Peoples Rights and Justice', district: 'uttarkashi', url: 'http://projects.anuyantra.com/project/dam-awareness-project-uttarakhand', projectname: 'Dam Awareness Project in Uttarakhand ', sum: 'Rehabilitation and Awareness Program in UttarakhandGoals:& CACIM intends to provide immediate relief in grains and medicine', state: 'uttarakhand', longlat: [30.966485, 78.6289831196545]}, 
+      {category: 'Education', district: 'south-west Delhi', url: 'http://projects.anuyantra.com/project/jaagriti-awakening', projectname: 'Jaagriti - an awakening', sum: 'To provide quality education and personality development to children in slums in Dwarka in Delhi', state: 'National Capital Territory Delhi', longlat: [28.5865046, 76.9791794293569]}, 
+      {category: 'Education', district: 'patna', url: 'http://projects.anuyantra.com/project/joyful-education-holistic-development-300-disadvantaged-slum-childrens-8-slums-patna', projectname: 'Joyful Education & Holistic Development of 300 Disadvantage Slum Childrens in 8 Slums of Patna', sum: 'Projects Objectives:To enhance educational status of 300 children with special focus on girl child via promoting process of joyful learningTo inculcate hygienic habits and better health amongst slum children', state: 'bihar', longlat: [25.609575, 85.1238191]}, 
+      {category: 'Health', district: 'barwani', url: 'http://projects.anuyantra.com/project/sathi-cehat', projectname: 'Sathi - Cehat', sum: 'The record of health system in India towards providing adequate health services has been exceptionally poor', state: 'madhya Pradesh', longlat: [21.7528808, 74.8972604994331]}, 
+      {category: 'Community Empowerment and Livelihood', district: 'chitradurga', url: 'http://projects.anuyantra.com/project/protection-amrit-mahal-kavals-challakere-taluk', projectname: 'Protection of Amrit Mahal Kavals of Challakere Taluk', sum: "Proposal seeking support to Environment Support Group's ongoing efforts to protect Amrit Mahal Kavals of Challakere Taluk, Chitradurga, Karnataka and associated biodiversity, livelihoods, traditional knowledge systems, etc", state: 'karnataka', longlat: [14.2266443, 76.4005122]}, 
+      {category: 'Women Empowerment', district: 'ahmedabad', url: 'http://projects.anuyantra.com/project/mainstreaming-gender-perspectives-various-institutions', projectname: 'Mainstreaming Gender Perspectives in Various Institutions', sum: 'For more than three decades, Utthan has been building a movement of women around issues such as basic livelihood needs, protection of resources, and restoration of the traditional role of communities in managing natural resources', state: 'gujarat', longlat: [23.0216238, 72.5797068]}, 
+      {category: 'Agriculture', district: 'south Twenty Four Parganas', url: 'http://projects.anuyantra.com/project/sustainable-organic-farming-sunderbans-bts', projectname: 'Sustainable Organic Farming in Sunderbans (with BTS)', sum: 'xxxGoals:& xxxAchievements:& xxx', state: 'West Bengal', longlat: [22.5, 88.666667]}, 
+      {category: 'Women Empowerment', district: 'bangalore Rural', url: 'http://projects.anuyantra.com/project/deepa-academy', projectname: 'Deepa Academy', sum: 'the funding would be to support the education and daily needs of the young visually challenged girls admitted to the academy', state: 'karnataka', longlat: [12.86431905, 77.2320366610386]}, 
+      {category: 'Community Empowerment and Livelihood', district: 'khordha', url: 'http://projects.anuyantra.com/project/artrc', projectname: 'ARTRC', sum: 'Funds for the expansion of the Industrial Training Centre of the AID Rural Technology Resource Centre in the Ranadevi Village of the Gajapati District in Odisha', state: 'odisha', longlat: [20.042873, 85.4986606779682]}
     ];
+
+    statenames = ['bihar', 'gujarat', 'karnataka', 'karnataka', 'madhya Pradesh', 'national Capital Territory Delhi', 'odisha', 'rajasthan', 'uttarakhand', 'west Bengal'];
 
     var mapCenter = new google.maps.LatLng(20.882847, 66.256759);
     var boxList =[];
@@ -314,9 +317,6 @@
             }
         });
 
-        //add markers for each project
-        addMarkers();
-
         //create button to reset map to broadest useful view
         var homeControlDiv = document.createElement('div');
         var homeControl = new HomeControl(homeControlDiv, map);
@@ -324,12 +324,20 @@
         homeControlDiv.index = 1;
         map.controls[google.maps.ControlPosition.TOP_RIGHT].push(homeControlDiv);
 
+        //add markers for each project
+        addMarkers();
+
         //initialize project list
         var options = {
             valueNames: ['projectname', 'url', 'district', 'state', 'sum']
         };
 
         var projects = new List('projects', options);
+
+        for(var i = 0; i < statenames.length; i++) {
+            $("#states").append($('<li> </li>').val(statenames[i]).html(capitalise(statenames[i])));  
+        }
+                
 
         /*jQuery time*/
         $(document).ready(function(){
@@ -362,11 +370,11 @@
               $('.search').val(state);
 
               //zoom on state
-              if(state=="Jaipur (जयपुर)"){
-                var newCenter = new google.maps.LatLng(26.5727-2, 73.839-7); 
+              if(state=="Rajasthan"){
+                var newCenter = new google.maps.LatLng(26.5727, 73.839-5); 
               }
-              else if(state=="Uttarkashi (उत्तरकाशी)"){
-                var newCenter = new google.maps.LatLng(30.33-2, 78.06-7);
+              else if(state=="Uttarakhand"){
+                var newCenter = new google.maps.LatLng(30.33, 78.06-5);
               }
 
               map.setCenter(newCenter);
@@ -419,88 +427,91 @@
         map.setZoom(6);
     }
 
-    //function to open sidebar details
-    function openside(i) {
-      projects.search(i);
-      $('.search').val(i);
-      $("#projects h3:contains(i)").next().slideDown();
-    }
-
     //add markers, infoboxes for each location
     function addMarkers(){
-        for (var i = 0; i < cityList.length; i++)
-        {
-            //add markers
-            marker = new google.maps.Marker({
-                position: new google.maps.LatLng(cityList[i].longlat[0], cityList[i].longlat[1]),
-                map: map,
-                id: i,
-                title: cityList[i].projectname,
-                icon: {
-                    path: google.maps.SymbolPath.CIRCLE,
-                    fillOpacity: 0.5,
-                    fillColor: '#00b0e6',
-                    strokeOpacity: 1.0,
-                    strokeColor: '#00b0e6',
-                    strokeWeight: 2.0, 
-                    scale: 10 //pixels
-                }
-            });     
-            gmarkers.push(marker);    
+      console.log(cityList);
+      for (var i = 0; i < cityList.length; i++)
+      {
+          //add markers
+          marker = new google.maps.Marker({
+              position: new google.maps.LatLng(cityList[i].longlat[0], cityList[i].longlat[1]),
+              map: map,
+              id: i,
+              title: cityList[i].projectname,
+              icon: {
+                  path: google.maps.SymbolPath.CIRCLE,
+                  fillOpacity: 0.5,
+                  fillColor: '#00b0e6',
+                  strokeOpacity: 1.0,
+                  strokeColor: '#00b0e6',
+                  strokeWeight: 2.0, 
+                  scale: 10 //pixels
+              }
+          });     
+          gmarkers.push(marker);    
 
-            //create textbox
-            var boxText = document.createElement("div");
-            boxText.id = i;
-            boxText.style.cssText = "width: 250px; box-shadow:2px 1px 5px 2px rgba(0, 0, 0, 0.3); margin-top: 8px; background: white; padding:10px; font-family:Verdana, sans-serif; font-size: 12px;";
-            boxText.innerHTML = createInfoWindowContent(cityList[i]);
+          //create textbox
+          var boxText = document.createElement("div");
+          boxText.id = i;
+          boxText.style.cssText = "width: 250px; box-shadow:2px 1px 5px 2px rgba(0, 0, 0, 0.3); margin-top: 8px; background: white; padding:10px; font-family:Verdana, sans-serif; font-size: 12px;";
+          boxText.innerHTML = createInfoWindowContent(cityList[i]);
 
-            //set infobox style options
-            var myOptions = {
-                content: boxText
-                ,disableAutoPan: false
-                ,maxWidth: 0
-                ,pixelOffset: new google.maps.Size(-140, 0)
-                ,zIndex: null
-                ,boxStyle: {
-                    width: "400px"
-                }
-                ,closeBoxMargin: "10px 2px 2px 2px"
-                ,closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif"
-                ,infoBoxClearance: new google.maps.Size(1, 1)
-                ,isHidden: false
-                ,pane: "floatPane"
-                ,enableEventPropagation: false
-            };
+          //set infobox style options
+          var myOptions = {
+              content: boxText
+              ,disableAutoPan: false
+              ,maxWidth: 0
+              ,pixelOffset: new google.maps.Size(-140, 0)
+              ,zIndex: null
+              ,boxStyle: {
+                  width: "400px"
+              }
+              ,closeBoxMargin: "10px 2px 2px 2px"
+              ,closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif"
+              ,infoBoxClearance: new google.maps.Size(1, 1)
+              ,isHidden: false
+              ,pane: "floatPane"
+              ,enableEventPropagation: false
+          };
 
-            //create infobox and add to list of all infoboxes
-            var ib = new InfoBox(myOptions);
-            boxList.push(ib);
+          //create infobox and add to list of all infoboxes
+          var ib = new InfoBox(myOptions);
+          boxList.push(ib);
 
-            //open infoboxes on mouseover
-            google.maps.event.addListener(marker,'mouseover',(function(marker, i) {
-                return function() {
-                    boxList[i].open(map, this);
-                }
-            })(marker, i));
-            //close infoboxes on mouseout
-            google.maps.event.addListener(marker,'mouseout',(function(marker, i) {
-                return function() {
-                    boxList[i].close(map, this);
-                }
-            })(marker, i));
+          //open infoboxes on mouseover
+          google.maps.event.addListener(marker,'mouseover',(function(marker, i) {
+              return function() {
+                  boxList[i].open(map, this);
+              }
+          })(marker, i));
+          //close infoboxes on mouseout
+          google.maps.event.addListener(marker,'mouseout',(function(marker, i) {
+              return function() {
+                  boxList[i].close(map, this);
+              }
+          })(marker, i));
 
-            //respnose to click on marker
-            google.maps.event.addDomListener(marker,'click',(function(marker, i) {
-                    return function() {
-                      alert('Will eventually in-depth sidebar details for ' + cityList[i][0])
-                    }
-                  })(marker, i));
-
-            //create list
-            buffer+="<li>" + createList(cityList[i]) + "</li>";
+          //create list
+          buffer+="<li>" + createList(cityList[i]) + "</li>";
         }
 
         $('#master').html(buffer);
+
+        // //add click response after adding list
+        // for (var i = 0; i < cityList.length; i++){
+
+        //   //open sidebar click on marker
+        //   google.maps.event.addDomListener(gmarkers[i],'click',(function(marker, i) {
+        //     return function() {
+        //       var name = cityList[i].projectname;
+        //       console.log(gmarkers[i], name);
+        //       // projects.search(name);
+        //       // $('.search').val(name);
+
+        //       $("#projects h3:contains(name)").next().slideDown();
+        //     }
+        //   })(marker,i));
+        // }
     }
 
     //build a button to reset map entirely to view of India
@@ -550,10 +561,10 @@
       function createInfoWindowContent(project) {
           return [
             '<b>' + project.projectname + '</b>',
-            capitalise(project.district) + ", " + capitalise(project.state),
-            '<i>' + project.category + '</i>',
+            '<i>' + capitalise(project.district) + ", " + capitalise(project.state)+ '</i>',
+            project.category,
             'NGO partner: ' + project.NGO,
-            '<a href="javascript:openside('+project.projectname+')">Learn more<\/a>'
+            // '<a href="javascript:openside('+project.projectname+')">Learn more<\/a>'
           ].join('<br>');
       }
       //similar helper for list elements
@@ -568,7 +579,7 @@
           "<li><p class='sum describe'><b>Description: </b>"+i.sum+"</p></li>",
           "<li><p class='describe'><b>Budget</b>: "+i.budget+"</p></li>",
           "<li><p><a id='visit' class='link1 describe' href='javascript:myclick(" + (gmarkers.length-1) + ")'>See on map</a>",
-          "<a id='url' class='link2 describe' href="+i.url+">Visit project page<\/a></p></li>",
+          "<a id=url class='link2 describe' href="+i.url+">Visit project page<\/a></p></li>",
           "</ul>"
         ].join("");
       }
@@ -596,11 +607,7 @@
           <li id='drop1'>
             Select state
             <div class="arrowsmall"></div>
-            <ul>
-              <li>Jaipur (जयपुर)</li>
-              <li>Uttarkashi (उत्तरकाशी)</li>
-              <li>State 3</li>
-            </ul>
+            <ul id='states'></ul>
           </li>
         </ul>
         <ul class='menu'>
