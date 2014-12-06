@@ -304,7 +304,8 @@
     var boxList =[];
     var gmarkers = []; 
     var buffer="";
-
+	var eventtracker = [];
+	
     function initialize() {
 
         //create map
@@ -417,7 +418,7 @@
 
         //open appropriate infobox
         google.maps.event.trigger(gmarkers[i], "mouseover");
-        
+        eventtracker[i] = true; 
 
         //reset center and zoom
         var newlong = gmarkers[i].getPosition().k-2;
@@ -447,7 +448,8 @@
                     scale: 10 //pixels
                 }
             });     
-            gmarkers.push(marker);    
+            gmarkers.push(marker); 
+			
 
             //create textbox
             var boxText = document.createElement("div");
@@ -463,7 +465,7 @@
                 ,pixelOffset: new google.maps.Size(-140, 0)
                 ,zIndex: null
                 ,boxStyle: {
-                    width: "400px"
+                    width: "270px"
                 }
                 ,closeBoxMargin: "10px 2px 2px 2px"
                 ,closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif"
@@ -476,27 +478,42 @@
             //create infobox and add to list of all infoboxes
             var ib = new InfoBox(myOptions);
             boxList.push(ib);
+			eventtracker.push(false)
 
             //open infoboxes on mouseover
             google.maps.event.addListener(marker,'mouseover',(function(marker, i) {
                 return function() {
                     boxList[i].open(map, this);
+					
                 }
             })(marker, i));
             //close infoboxes on mouseout
             google.maps.event.addListener(marker,'mouseout',(function(marker, i) {
                 return function() {
-                    boxList[i].close(map, this);
+					if(eventtracker[i] == false)
+						{
+							boxList[i].close(map, this);
+						}
+					
+					
                 }
             })(marker, i));
 
             //respnose to click on marker
             google.maps.event.addDomListener(marker,'click',(function(marker, i) {
                     return function() {
-                      alert('Will eventually in-depth sidebar details for ' + cityList[i][0])
+                      eventtracker[i] = true;
                     }
                   })(marker, i));
-
+				  
+			//deals with the hover vs click problem 
+			google.maps.event.addListener(boxList[i],'closeclick',(function(marker, i){
+				return function() {
+					eventtracker[i] = false; 
+					//alert("hi");
+				}
+				})(marker, i));
+			
             //create list
             buffer+="<li><p class='district'>"+ capitalise(cityList[i].district)+"</p>, <p class='state'>"+capitalise(cityList[i].state)+"</p><h3 class='projectname'>"+cityList[i].projectname+"</h3><ul><li><p class='sum'>"+cityList[i].sum+"</p></li><li><a id='visit' href='javascript:myclick(" + (gmarkers.length-1) + ")'><p>See on map<p></a></li></ul></li>";
 
