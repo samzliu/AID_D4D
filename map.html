@@ -11,11 +11,54 @@
         p{
             font-size:13px;
         }
+        ul
+        {
+          padding: 0;
+          list-style-type: none;
+        }
+        .wrap {
+          background-color: white;
+          box-shadow: 
+            2px 1px 5px 2px rgba(0, 0, 0, 0.3); 
+        }
+        #top{
+          margin-bottom: 10px;
+          padding-right: 2px;
+        }
         #map-canvas {
             width:100%;
             height:690px;
             float:right;
             margin-top: 0px;
+        }
+        #projects{
+          width:46%;
+          height:690px;
+          float:right;
+          margin-top: 0px;
+          position: absolute; 
+          top: 15px;
+          left: 20px;
+          z-index: 99;
+        }
+        #master{
+          height:575px;
+          overflow-y:scroll
+        }
+        #projects h3 {
+            cursor: pointer;
+            font-weight: normal;
+        }
+        #projects h3:hover {
+            text-shadow: 0 0 1px rgba(255, 255, 255, 0.7);
+            color: gray;
+        }
+        /*hide the non active LIs by default*/
+        #projects ul ul {
+            display: none;
+        }
+        #projects li.active ul {
+            display: block;
         }
         .list {
           font-family:sans-serif;
@@ -30,9 +73,13 @@
           margin-bottom: 5px;
           margin-right: 4px;
           margin-left: 4px;
-          border-bottom: 1px solid;
+          border-bottom: 1px solid gray;
+          line-height: 15px;
         }
-        li .district, li .state{
+        .list li ul{
+          margin-top: 15px;
+        }
+        li .district, li .state, li h4{
           display: inline;
           line-height: 27px;
         }
@@ -42,8 +89,13 @@
         h3 {
           font-size: 16px;
           margin:0 0 0.3rem;
-          font-weight: normal;
           font-weight:bold;
+          color: #28a8e0;
+        }
+        h4{
+          margin: 0 0 0.3rem;
+          font-size: 12px;
+          font-weight: normal;
         }
         p {
           margin:0;
@@ -54,26 +106,42 @@
           padding:7px 14px;
           width: 30%;
           margin: 20px;
+          margin-right: 5px;
+
         }
         input:focus {
           outline:none;
           border-color:#aaa;
         }
-        button {
-            margin-left: 5px;
-            margin-right: 0;
-            margin-bottom: 0px;
-            width: 80px;
-            padding:8px 10px;
-        }
-        #sort {
-            font-family:sans-serif;
-            font-size: 14px;
-            line-height: 27px;
-            margin-left: 0;
-        }
-        .sort {
+        button{
+          margin-left: 1px;
+          margin-right: 0;
+          margin-bottom: 0px;
+          width: 110px;
           padding:8px 10px;
+        }
+        #category{
+          width: 120px;
+        }
+        .arrow {
+          margin-top: 5px;
+          float: right;
+          width: 0; 
+          height: 0; 
+          border-left: 8px solid transparent;
+          border-right: 8px solid transparent;
+          border-top: 8px solid gray;
+        }
+        .arrowsmall {
+          margin-top: 5px;
+          float: right;
+          width: 0; 
+          height: 0; 
+          border-left: 5px solid transparent;
+          border-right: 5px solid transparent;
+          border-top: 5px solid white;
+        }
+        .sort, .menu{
           border-radius: 6px;
           border:none;
           display:inline-block;
@@ -81,6 +149,7 @@
           text-decoration: none;
           background-color: #28a8e0;
           height:30px;
+          cursor: pointer;
         }
         .sort:hover {
           text-decoration: none;
@@ -97,7 +166,7 @@
           border-bottom: 5px solid transparent;
           content:"";
           position: relative;
-          top:-10px;
+          top:-15px;
           right:-5px;
         }
         .sort.asc:after {
@@ -108,7 +177,7 @@
           border-top: 5px solid #fff;
           content:"";
           position: relative;
-          top:13px;
+          top:9px;
           right:-5px;
         }
         .sort.desc:after {
@@ -122,38 +191,82 @@
           top:-10px;
           right:-5px;
         }
-        #projects{
-            width:45%;
-            height:690px;
-            float:right;
-            margin-top: 0px;
-            position: absolute; 
-            top: 15px;
-            left: 20px;
-            z-index: 99;
+        #sort{
+          font-family:sans-serif;
+          font-size: 14px;
+          line-height: 27px;
+          margin-left: 0;
         }
-        #projects h3 {
-            cursor: pointer;
+        .menu {
+          margin-left: 5px;
+          margin-right: 0;
+          margin-bottom: 0px;
+          width: 90px;
+          padding:8px 10px;
+          height: 14px;
         }
-        #projects h3:hover {
-            text-shadow: 0 0 1px rgba(255, 255, 255, 0.7);
-            color: gray;
+        .menu, #drop1, #drop2 ul{
+          font-family:sans-serif;
+          font-size: 11px;
+          line-height: 15px;
+          margin-left: 0;
+        }   
+        .menu:hover {
+          text-decoration: none;
+          background-color:#1b8aba;
+          cursor: pointer;
         }
-        /*hide the non active LIs by default*/
-        #projects ul ul {
-            display: none;
+        #drop1 ul {
+          border-radius: 6px;
+          border:none;
+          padding:0;
+          position: absolute;
+          top: 50px;
+          left: 240px;
+          width: 150px;
+          box-shadow: none;
+          display: none;
+          opacity: 0;
+          visibility: hidden;
         }
-        #projects li.active ul {
-            display: block;
+        #drop2 ul{
+          border-radius: 6px;
+          border:none;
+          padding:0;
+          position: absolute;
+          top: 50px;
+          left: 355px;
+          width: 150px;
+          box-shadow: none;
+          display: none;
+          opacity: 0;
+          visibility: hidden;
         }
-        .wrap {
-          background-color: white;
-          box-shadow: 
-            2px 1px 5px 2px rgba(0, 0, 0, 0.3); 
+        #drop1 ul li, #drop2 ul li { 
+          background: #555; 
+          display: block; 
+          color:#fff;
+          background-color: #767474;
+          padding:8px 10px;
         }
-        #top{
-          margin-bottom: 10px;
-          padding-right: 2px;
+        .menu #drop1 li:hover, .menu #drop2 li:hover  { 
+          background-color:#3c3a3a; 
+        }
+        .menu:hover #drop1 ul, .menu:hover #drop2 ul{
+          display: block;
+          opacity: 1;
+          visibility: visible;
+          background-color:#1b8aba;
+        }
+        .link1, .link2{
+          display:inline-block;
+          margin-top: 0;
+        }
+        .link2{
+          padding-left:10px;
+        }
+        .describe{
+          margin-top: 8px;
         }
     </style>
 
@@ -173,20 +286,19 @@
     <script type="text/javascript">
 
     var cityList = [
-        // ["RTI Manch", "http://projects.anuyantra.com/project/rti-manch", "rajasthan", "jaipur", [26.5727, 73.839]], 
-        // ["Dam Awareness Project in Uttarakhand ", "http://projects.anuyantra.com/project/dam-awareness-project-uttarakhand", "uttarakhand", "uttarkashi", [30.33, 78.06]], 
-        // ["Jaagriti - an awakening", "http://projects.anuyantra.com/project/jaagriti-awakening", "national-capital-territory-delhi", "south-west-delhi", [28.61, 77.23]], 
-        // ["Joyful Education & Holistic Development Of 300 Disadvantaged Slum Childrens In 8 Slums Of Patna", "http://projects.anuyantra.com/project/joyful-education-holistic-development-300-disadvantaged-slum-childrens-8-slums-patna", "bihar", "patna", [25.37, 85.13]], 
-        // ["Sathi - Cehat", "http://projects.anuyantra.com/project/sathi-cehat", "madhya-pradesh", "barwani", [23.25, 77.417]], 
-        // ["Protection of Amrit Mahal Kavals of Challakere Taluk", "http://projects.anuyantra.com/project/protection-amrit-mahal-kavals-challakere-taluk", "karnataka", "chitradurga", [12.9702, 77.5603]], 
-        // ["Mainstreaming Gender Perspectives in Various Institutions", "http://projects.anuyantra.com/project/mainstreaming-gender-perspectives-various-institutions", "gujarat", "ahmedabad", [23.2167, 72.6833]], 
-        // ["Sustainable Organic Farming in Sunderbans (with BTS)", "http://projects.anuyantra.com/project/sustainable-organic-farming-sunderbans-bts", "west-bengal", "south-24-parganas", [22.5667, 88.3667]], 
-        // ["Deepa Academy", "http://projects.anuyantra.com/project/deepa-academy", "karnataka", "bangalore-rural", [12.9702, 77.5603]], 
-        // ["ARTRC", "http://projects.anuyantra.com/project/artrc", "odisha", "khordha", [20.15, 85.5]]
-
-        {projectname:"RTI Manch", url:"http://projects.anuyantra.com/project/rti-manch", district:"rajasthan", state:"jaipur", longlat: [26.5727, 73.839], sum: "insert long sum here. blah blah A function that returns an HTML string, DOM element(s), or jQuery object to insert after each element in the set of matched elements. Receives the index position ... unicorn"},
-        {projectname: "Dam Awareness Project in Uttarakhand ", url:"http://projects.anuyantra.com/project/dam-awareness-project-uttarakhand", district:"uttarakhand", state:"uttarkashi", longlat:[30.33, 78.06], sum: "lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum"}
+      {category: 'Peoples Rights and Justice', district: 'jaipur', url: 'http://projects.anuyantra.com/project/rti-manch', projectname: 'RTI Manch', sum: "Manthan's RTI Manch initiative focuses on improving transparency in governance and helping people empower themselves by using Right to Information correctly", state: 'rajasthan', longlat: [26.9161293,75.8204056]}, 
+      {category: 'Peoples Rights and Justice', district: 'uttarkashi', url: 'http://projects.anuyantra.com/project/dam-awareness-project-uttarakhand', projectname: 'Dam Awareness Project in Uttarakhand ', sum: 'Rehabilitation and Awareness Program in UttarakhandGoals:& CACIM intends to provide immediate relief in grains and medicine', state: 'uttarakhand', longlat: [30.966485, 78.6289831196545]}, 
+      {category: 'Education', district: 'south-west Delhi', url: 'http://projects.anuyantra.com/project/jaagriti-awakening', projectname: 'Jaagriti - an awakening', sum: 'To provide quality education and personality development to children in slums in Dwarka in Delhi', state: 'National Capital Territory Delhi', longlat: [28.5865046, 76.9791794293569]}, 
+      {category: 'Education', district: 'patna', url: 'http://projects.anuyantra.com/project/joyful-education-holistic-development-300-disadvantaged-slum-childrens-8-slums-patna', projectname: 'Joyful Education & Holistic Development of 300 Disadvantage Slum Childrens in 8 Slums of Patna', sum: 'Projects Objectives:To enhance educational status of 300 children with special focus on girl child via promoting process of joyful learningTo inculcate hygienic habits and better health amongst slum children', state: 'bihar', longlat: [25.609575, 85.1238191]}, 
+      {category: 'Health', district: 'barwani', url: 'http://projects.anuyantra.com/project/sathi-cehat', projectname: 'Sathi - Cehat', sum: 'The record of health system in India towards providing adequate health services has been exceptionally poor', state: 'madhya Pradesh', longlat: [21.7528808, 74.8972604994331]}, 
+      {category: 'Community Empowerment and Livelihood', district: 'chitradurga', url: 'http://projects.anuyantra.com/project/protection-amrit-mahal-kavals-challakere-taluk', projectname: 'Protection of Amrit Mahal Kavals of Challakere Taluk', sum: "Proposal seeking support to Environment Support Group's ongoing efforts to protect Amrit Mahal Kavals of Challakere Taluk, Chitradurga, Karnataka and associated biodiversity, livelihoods, traditional knowledge systems, etc", state: 'karnataka', longlat: [14.2266443, 76.4005122]}, 
+      {category: 'Women Empowerment', district: 'ahmedabad', url: 'http://projects.anuyantra.com/project/mainstreaming-gender-perspectives-various-institutions', projectname: 'Mainstreaming Gender Perspectives in Various Institutions', sum: 'For more than three decades, Utthan has been building a movement of women around issues such as basic livelihood needs, protection of resources, and restoration of the traditional role of communities in managing natural resources', state: 'gujarat', longlat: [23.0216238, 72.5797068]}, 
+      {category: 'Agriculture', district: 'south Twenty Four Parganas', url: 'http://projects.anuyantra.com/project/sustainable-organic-farming-sunderbans-bts', projectname: 'Sustainable Organic Farming in Sunderbans (with BTS)', sum: 'xxxGoals:& xxxAchievements:& xxx', state: 'West Bengal', longlat: [22.5, 88.666667]}, 
+      {category: 'Women Empowerment', district: 'bangalore Rural', url: 'http://projects.anuyantra.com/project/deepa-academy', projectname: 'Deepa Academy', sum: 'the funding would be to support the education and daily needs of the young visually challenged girls admitted to the academy', state: 'karnataka', longlat: [12.86431905, 77.2320366610386]}, 
+      {category: 'Community Empowerment and Livelihood', district: 'khordha', url: 'http://projects.anuyantra.com/project/artrc', projectname: 'ARTRC', sum: 'Funds for the expansion of the Industrial Training Centre of the AID Rural Technology Resource Centre in the Ranadevi Village of the Gajapati District in Odisha', state: 'odisha', longlat: [20.042873, 85.4986606779682]}
     ];
+
+    statenames = ['bihar', 'gujarat', 'karnataka', 'karnataka', 'madhya Pradesh', 'national Capital Territory Delhi', 'odisha', 'rajasthan', 'uttarakhand', 'west Bengal'];
 
     var mapCenter = new google.maps.LatLng(20.882847, 66.256759);
     var boxList =[];
@@ -205,15 +317,15 @@
             }
         });
 
-        //add markers for each project
-        addMarkers();
-
         //create button to reset map to broadest useful view
         var homeControlDiv = document.createElement('div');
         var homeControl = new HomeControl(homeControlDiv, map);
 
         homeControlDiv.index = 1;
         map.controls[google.maps.ControlPosition.TOP_RIGHT].push(homeControlDiv);
+
+        //add markers for each project
+        addMarkers();
 
         //initialize project list
         var options = {
@@ -222,18 +334,77 @@
 
         var projects = new List('projects', options);
 
+        for(var i = 0; i < statenames.length; i++) {
+            $("#states").append($('<li> </li>').val(statenames[i]).html(capitalise(statenames[i])));  
+        }
+                
+
         /*jQuery time*/
         $(document).ready(function(){
             $("#projects h3").click(function(){
+
                 //slide up all the link lists
                 $(this).next().slideUp();
+
+                //reset all arrows to point downwards
+                $(this).find(".arrow").css({"border-bottom":0, "border-top":"8px solid gray"});
+
                 //slide down the link list below the h3 clicked - only if its closed
                 if(!$(this).next().is(":visible"))
                 {
-                    $(this).next().slideDown()
-                    console.log($(this).next())
+                    $(this).next().slideDown();
+
+                    //reset arrow to point upwards
+                    $(this).find(".arrow").css({"border-bottom":"8px solid gray", "border-top":0});
                 }
+                
             })
+
+            //filter results by state
+            $("#drop1 ul li").click(function(){
+              //get selected state
+              state = $(this).text();
+
+              //filter results and show in search bar
+              projects.search(state);
+              $('.search').val(state);
+
+              //zoom on state
+              if(state=="Rajasthan"){
+                var newCenter = new google.maps.LatLng(26.5727, 73.839-5); 
+              }
+              else if(state=="Uttarakhand"){
+                var newCenter = new google.maps.LatLng(30.33, 78.06-5);
+              }
+
+              map.setCenter(newCenter);
+              map.setZoom(6);
+
+            })
+            //filter results by category
+            // $("#drop2 ul li").click(function(){
+            //   //get selected state
+            //   category = $(this).text();
+
+            //   //filter results and show in search bar
+            //   projects.search(category);
+            //   $('.search').val(category);
+
+            //   //zoom on state
+            //   // if(state=="Jaipur (जयपुर)"){
+            //   //   var newCenter = new google.maps.LatLng(26.5727-2, 73.839-7);
+            //   //   map.setCenter(newCenter);
+            //   //   map.setZoom(6);
+            //   })
+            // //clear filter
+            // $("#drop1").click(function(){
+            //   current = $('.search').val();
+            //   console.log(current);
+
+            //   if(current != ""){
+            //     $("#drop1").text("Select state");
+            //   }
+            // })
         })
     }
 
@@ -328,9 +499,26 @@
 
             //create list
             buffer+="<li><p class='district'>"+ capitalise(cityList[i].district)+"</p>, <p class='state'>"+capitalise(cityList[i].state)+"</p><h3 class='projectname'>"+cityList[i].projectname+"</h3><ul><li><p class='sum'>"+cityList[i].sum+"</p></li><li><a id='visit' href='javascript:myclick(" + (gmarkers.length-1) + ")'><p>See on map<p></a></li></ul></li>";
+
         }
 
         $('#master').html(buffer);
+
+        // //add click response after adding list
+        // for (var i = 0; i < cityList.length; i++){
+
+        //   //open sidebar click on marker
+        //   google.maps.event.addDomListener(gmarkers[i],'click',(function(marker, i) {
+        //     return function() {
+        //       var name = cityList[i].projectname;
+        //       console.log(gmarkers[i], name);
+        //       // projects.search(name);
+        //       // $('.search').val(name);
+
+        //       $("#projects h3:contains(name)").next().slideDown();
+        //     }
+        //   })(marker,i));
+        // }
     }
 
     //build a button to reset map entirely to view of India
@@ -339,24 +527,26 @@
         // Set CSS styles for the DIV containing the control
         // Setting padding to 5 px will offset the control
         // from the edge of the map
-        controlDiv.style.padding = '5px';
+        controlDiv.style.padding = '6px';
 
         // Set CSS for the control border
         var controlUI = document.createElement('div');
         controlUI.style.backgroundColor = 'white';
-        controlUI.style.borderStyle = 'solid';
-        controlUI.style.borderWidth = '1px';
+        controlUI.style.borderColor = 'gray';
+        controlUI.style.border = '1px';
+        controlUI.style.boxShadow = '1px 1px 2px 1px rgba(0, 0, 0, 0.3)';
         controlUI.style.cursor = 'pointer';
         controlUI.style.textAlign = 'center';
-        controlUI.title = 'Click to set the map to all India';
         controlDiv.appendChild(controlUI);
 
         // Set CSS for the control interior
         var controlText = document.createElement('div');
-        controlText.style.fontFamily = 'Arial,sans-serif';
-        controlText.style.fontSize = '12px';
+        controlText.style.fontFamily = 'sans-serif';
+        controlText.style.fontSize = '11px';
         controlText.style.paddingLeft = '4px';
         controlText.style.paddingRight = '4px';
+        controlText.style.paddingTop = '2px';
+        controlText.style.paddingBottom = '2px';
         controlText.innerHTML = '<b>Show All India</b>';
         controlUI.appendChild(controlText);
 
@@ -375,25 +565,41 @@
       }
 
       //helper function to create content window for each project
-        function createInfoWindowContent(project) {
-            return [
-              '<b>' + project.projectname + '</b>',
-              'State: ' + capitalise(project.state),
-              'District: ' + capitalise(project.district),
-              'sum:',
-              '<a id="url" href='+project.url+'>Visit project page<\/a>'
-            ].join('<br>');
-        }
+      function createInfoWindowContent(project) {
+          return [
+            '<b>' + project.projectname + '</b>',
+            '<i>' + capitalise(project.district) + ", " + capitalise(project.state)+ '</i>',
+            project.category,
+            'NGO partner: ' + project.NGO,
+            // '<a href="javascript:openside('+project.projectname+')">Learn more<\/a>'
+          ].join('<br>');
+      }
+      //similar helper for list elements
+      function createList(i){
+        return [
+          "<i><p class='district'>"+ capitalise(i.district)+", </p>",
+          "<p class='state'>"+capitalise(i.state)+"</p></i>",
+          "<h4> – "+i.category+"</h4>",
+          "<h3 class='projectname'>"+i.projectname+"<div class='arrow'></div></h3>",
+          "<ul>",
+          "<li><p class='describe'><b>Partner NGO</b>: "+i.NGO+"</p></li>",
+          "<li><p class='sum describe'><b>Description: </b>"+i.sum+"</p></li>",
+          "<li><p class='describe'><b>Budget</b>: "+i.budget+"</p></li>",
+          "<li><p><a id='visit' class='link1 describe' href='javascript:myclick(" + (gmarkers.length-1) + ")'>See on map</a>",
+          "<a id=url class='link2 describe' href="+i.url+">Visit project page<\/a></p></li>",
+          "</ul>"
+        ].join("");
+      }
 
-        //capitalization
-        function capitalise(string)
-        {
-            return string.charAt(0).toUpperCase() + string.slice(1);
-        }
+      //capitalization
+      function capitalise(string)
+      {
+          return string.charAt(0).toUpperCase() + string.slice(1);
+      }
     </script>
 </head>
 
-<body onload="initialize();">
+<body onload="initialize();" link="gray">
 
     <div id ="map-canvas"></div>
 
@@ -401,18 +607,29 @@
     <div id = "projects"> 
       <div class="wrap" id="top">
         <!-- search box -->
-        <input class="search" placeholder="Search projects" />
+        <input class="search" placeholder="Search projects"/>
 
         <!-- buttons -->
-        <span id= 'sort'>Sort by:</span>
+        <ul class='menu'>
+          <li id='drop1'>
+            Select state
+            <div class="arrowsmall"></div>
+            <ul id='states'></ul>
+          </li>
+        </ul>
+        <ul class='menu'>
+          <li id='drop2'>
+            Select category
+            <div class="arrowsmall"></div>
+            <ul>
+              <li>Peoples Rights and Justice</li>
+              <li>Women</li>
+              <li>Other</li>
+            </ul>
+          </li>
+        </ul>
         <button class="sort" data-sort="projectname">
-            Project 
-        </button>
-        <button class="sort" data-sort="state">
-            State
-        </button>
-         <button class="sort" data-sort="">
-            TBD
+          Sort by project
         </button>
       </div>
 
