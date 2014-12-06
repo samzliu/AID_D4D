@@ -82,6 +82,7 @@
         li .district, li .state, li h4{
           display: inline;
           line-height: 27px;
+          /*color: #969393;*/
         }
         .avatar {
           max-width: 150px;
@@ -286,16 +287,86 @@
     <script type="text/javascript">
 
     var cityList = [
-      {category: 'Peoples Rights and Justice', district: 'jaipur', url: 'http://projects.anuyantra.com/project/rti-manch', projectname: 'RTI Manch', sum: "Manthan's RTI Manch initiative focuses on improving transparency in governance and helping people empower themselves by using Right to Information correctly", state: 'rajasthan', longlat: [26.9161293,75.8204056]}, 
-      {category: 'Peoples Rights and Justice', district: 'uttarkashi', url: 'http://projects.anuyantra.com/project/dam-awareness-project-uttarakhand', projectname: 'Dam Awareness Project in Uttarakhand ', sum: 'Rehabilitation and Awareness Program in UttarakhandGoals:& CACIM intends to provide immediate relief in grains and medicine', state: 'uttarakhand', longlat: [30.966485, 78.6289831196545]}, 
-      {category: 'Education', district: 'south-west Delhi', url: 'http://projects.anuyantra.com/project/jaagriti-awakening', projectname: 'Jaagriti - an awakening', sum: 'To provide quality education and personality development to children in slums in Dwarka in Delhi', state: 'National Capital Territory Delhi', longlat: [28.5865046, 76.9791794293569]}, 
-      {category: 'Education', district: 'patna', url: 'http://projects.anuyantra.com/project/joyful-education-holistic-development-300-disadvantaged-slum-childrens-8-slums-patna', projectname: 'Joyful Education & Holistic Development of 300 Disadvantage Slum Childrens in 8 Slums of Patna', sum: 'Projects Objectives:To enhance educational status of 300 children with special focus on girl child via promoting process of joyful learningTo inculcate hygienic habits and better health amongst slum children', state: 'bihar', longlat: [25.609575, 85.1238191]}, 
-      {category: 'Health', district: 'barwani', url: 'http://projects.anuyantra.com/project/sathi-cehat', projectname: 'Sathi - Cehat', sum: 'The record of health system in India towards providing adequate health services has been exceptionally poor', state: 'madhya Pradesh', longlat: [21.7528808, 74.8972604994331]}, 
-      {category: 'Community Empowerment and Livelihood', district: 'chitradurga', url: 'http://projects.anuyantra.com/project/protection-amrit-mahal-kavals-challakere-taluk', projectname: 'Protection of Amrit Mahal Kavals of Challakere Taluk', sum: "Proposal seeking support to Environment Support Group's ongoing efforts to protect Amrit Mahal Kavals of Challakere Taluk, Chitradurga, Karnataka and associated biodiversity, livelihoods, traditional knowledge systems, etc", state: 'karnataka', longlat: [14.2266443, 76.4005122]}, 
-      {category: 'Women Empowerment', district: 'ahmedabad', url: 'http://projects.anuyantra.com/project/mainstreaming-gender-perspectives-various-institutions', projectname: 'Mainstreaming Gender Perspectives in Various Institutions', sum: 'For more than three decades, Utthan has been building a movement of women around issues such as basic livelihood needs, protection of resources, and restoration of the traditional role of communities in managing natural resources', state: 'gujarat', longlat: [23.0216238, 72.5797068]}, 
-      {category: 'Agriculture', district: 'south Twenty Four Parganas', url: 'http://projects.anuyantra.com/project/sustainable-organic-farming-sunderbans-bts', projectname: 'Sustainable Organic Farming in Sunderbans (with BTS)', sum: 'xxxGoals:& xxxAchievements:& xxx', state: 'West Bengal', longlat: [22.5, 88.666667]}, 
-      {category: 'Women Empowerment', district: 'bangalore Rural', url: 'http://projects.anuyantra.com/project/deepa-academy', projectname: 'Deepa Academy', sum: 'the funding would be to support the education and daily needs of the young visually challenged girls admitted to the academy', state: 'karnataka', longlat: [12.86431905, 77.2320366610386]}, 
-      {category: 'Community Empowerment and Livelihood', district: 'khordha', url: 'http://projects.anuyantra.com/project/artrc', projectname: 'ARTRC', sum: 'Funds for the expansion of the Industrial Training Centre of the AID Rural Technology Resource Centre in the Ranadevi Village of the Gajapati District in Odisha', state: 'odisha', longlat: [20.042873, 85.4986606779682]}
+      {'category': 'Peoples Rights And Justice',
+      'district': 'Jaipur',
+      'hindi': ' \u092d\u093e\u0930\u0924 \u0917\u0923\u0930\u093e\u091c\u094d\u092f',
+      'longlat': [26.9161293, 75.8204056],
+      'projectname': 'Rti Manch',
+      'state': 'Rajasthan',
+      'sum': "Manthan's RTI Manch initiative focuses on improving transparency in governance and helping people empower themselves by using Right to Information correctly",
+      'url': 'http://projects.anuyantra.com/project/rti-manch'},
+     {'category': 'Peoples Rights And Justice',
+      'district': 'Uttarkashi',
+      'hindi': ' \u092d\u093e\u0930\u0924 \u0917\u0923\u0930\u093e\u091c\u094d\u092f',
+      'longlat': [30.966485, 78.6289831196545],
+      'projectname': 'Dam Awareness Project In Uttarakhand ',
+      'state': 'Uttarakhand',
+      'sum': 'Rehabilitation and Awareness Program in UttarakhandGoals:& CACIM intends to provide immediate relief in grains and medicine',
+      'url': 'http://projects.anuyantra.com/project/dam-awareness-project-uttarakhand'},
+     {'category': 'Education',
+      'district': 'South West Delhi',
+      'hindi': ' India',
+      'longlat': [28.5865046, 76.9791794293569],
+      'projectname': 'Jaagriti   An Awakening',
+      'state': 'National Capital Territory Delhi',
+      'sum': 'To provide quality education and personality development to children in slums in Dwarka in Delhi',
+      'url': 'http://projects.anuyantra.com/project/jaagriti-awakening'},
+     {'category': 'Education',
+      'district': 'Patna',
+      'hindi': ' \u092d\u093e\u0930\u0924 \u0917\u0923\u0930\u093e\u091c\u094d\u092f',
+      'longlat': [25.609575, 85.1238191],
+      'projectname': 'Joyful Education & Holistic Development Of 300 Disadvantaged Slum Childrens In 8 Slums Of Patna',
+      'state': 'Bihar',
+      'sum': 'Projects Objectives:To enhance educational status of 300 children with special focus on girl child via promoting process of joyful learningTo inculcate hygienic habits and better health amongst slum children',
+      'url': 'http://projects.anuyantra.com/project/joyful-education-holistic-development-300-disadvantaged-slum-childrens-8-slums-patna'},
+     {'category': 'Health',
+      'district': 'Barwani',
+      'hindi': ' \u092d\u093e\u0930\u0924 \u0917\u0923\u0930\u093e\u091c\u094d\u092f',
+      'longlat': [21.7528808, 74.8972604994331],
+      'projectname': 'Sathi   Cehat',
+      'state': 'Madhya Pradesh',
+      'sum': 'The record of health system in India towards providing adequate health services has been exceptionally poor',
+      'url': 'http://projects.anuyantra.com/project/sathi-cehat'},
+     {'category': 'Community Empowerment And Livelihood',
+      'district': 'Chitradurga',
+      'hindi': ' \u092d\u093e\u0930\u0924 \u0917\u0923\u0930\u093e\u091c\u094d\u092f',
+      'longlat': [14.2266443, 76.4005122],
+      'projectname': 'Protection Of Amrit Mahal Kavals Of Challakere Taluk',
+      'state': 'Karnataka',
+      'sum': "Proposal seeking support to Environment Support Group's ongoing efforts to protect Amrit Mahal Kavals of Challakere Taluk, Chitradurga, Karnataka and associated biodiversity, livelihoods, traditional knowledge systems, etc",
+      'url': 'http://projects.anuyantra.com/project/protection-amrit-mahal-kavals-challakere-taluk'},
+     {'category': 'Women Empowerment',
+      'district': 'Ahmedabad',
+      'hindi': ' \u092d\u093e\u0930\u0924 \u0917\u0923\u0930\u093e\u091c\u094d\u092f',
+      'longlat': [23.0216238, 72.5797068],
+      'projectname': 'Mainstreaming Gender Perspectives In Various Institutions',
+      'state': 'Gujarat',
+      'sum': 'For more than three decades, Utthan has been building a movement of women around issues such as basic livelihood needs, protection of resources, and restoration of the traditional role of communities in managing natural resources',
+      'url': 'http://projects.anuyantra.com/project/mainstreaming-gender-perspectives-various-institutions'},
+     {'category': 'Agriculture',
+      'district': 'South Twenty Four Parganas',
+      'hindi': ' \u092d\u093e\u0930\u0924 \u0917\u0923\u0930\u093e\u091c\u094d\u092f',
+      'longlat': [22.5, 88.666667],
+      'projectname': 'Sustainable Organic Farming In Sunderbans (With Bts)',
+      'state': 'West Bengal',
+      'sum': 'xxxGoals:& xxxAchievements:& xxx',
+      'url': 'http://projects.anuyantra.com/project/sustainable-organic-farming-sunderbans-bts'},
+     {'category': 'Women Empowerment',
+      'district': 'Bangalore Rural',
+      'hindi': ' \u092d\u093e\u0930\u0924 \u0917\u0923\u0930\u093e\u091c\u094d\u092f',
+      'longlat': [12.86431905, 77.2320366610386],
+      'projectname': 'Deepa Academy',
+      'state': 'Karnataka',
+      'sum': 'the funding would be to support the education and daily needs of the young visually challenged girls admitted to the academy',
+      'url': 'http://projects.anuyantra.com/project/deepa-academy'},
+     {'category': 'Community Empowerment And Livelihood',
+      'district': 'Khordha',
+      'hindi': ' \u092d\u093e\u0930\u0924 \u0917\u0923\u0930\u093e\u091c\u094d\u092f',
+      'longlat': [20.042873, 85.4986606779682],
+      'projectname': 'Artrc',
+      'state': 'Odisha',
+      'sum': 'Funds for the expansion of the Industrial Training Centre of the AID Rural Technology Resource Centre in the Ranadevi Village of the Gajapati District in Odisha',
+      'url': 'http://projects.anuyantra.com/project/artrc'}
     ];
 
     statenames = ['bihar', 'gujarat', 'karnataka', 'karnataka', 'madhya Pradesh', 'national Capital Territory Delhi', 'odisha', 'rajasthan', 'uttarakhand', 'west Bengal'];
@@ -369,15 +440,17 @@
               projects.search(state);
               $('.search').val(state);
 
+              var go;
+
               //zoom on state
               if(state=="Rajasthan"){
-                var newCenter = new google.maps.LatLng(26.5727, 73.839-5); 
+                go = new google.maps.LatLng(26.5727, 73.839-5); 
               }
               else if(state=="Uttarakhand"){
-                var newCenter = new google.maps.LatLng(30.33, 78.06-5);
+                go = new google.maps.LatLng(30.33, 78.06-5);
               }
 
-              map.setCenter(newCenter);
+              map.setCenter(go);
               map.setZoom(6);
 
             })
@@ -568,7 +641,7 @@
       function createInfoWindowContent(project) {
           return [
             '<b>' + project.projectname + '</b>',
-            '<i>' + capitalise(project.district) + ", " + capitalise(project.state)+ '</i>',
+            '<i>' + capitalise(project.district) + ", " + capitalise(project.state)+ '('+project.hindi+')</i>',
             project.category,
             'NGO partner: ' + project.NGO,
             // '<a href="javascript:openside('+project.projectname+')">Learn more<\/a>'
@@ -578,7 +651,7 @@
       function createList(i){
         return [
           "<i><p class='district'>"+ capitalise(i.district)+", </p>",
-          "<p class='state'>"+capitalise(i.state)+"</p></i>",
+          "<p class='state'>"+capitalise(i.state)+ "</i> ("+i.hindi +")</p>",
           "<h4> – "+i.category+"</h4>",
           "<h3 class='projectname'>"+i.projectname+"<div class='arrow'></div></h3>",
           "<ul>",
